@@ -1,0 +1,31 @@
+# Colab config — all work on local Colab disk; Drive is used only when publishing.
+
+voice_name: myvoice
+output_root: /content/piper-work/datasets
+
+language_code: de
+dataset_version: v01
+espeak_voice: de
+
+total_entries: 2500  # overridden by NUM_UTTERANCES in Colab notebook cell 10
+val_ratio: 0.12
+seed: 42
+resume: true
+max_sentence_words: 50  # skip book sentences longer than this (no chunking)
+
+tts:
+  backend: faster
+  model_size: 0.6b
+  mode: base
+  language: German
+  device: cuda
+  dtype: bfloat16
+  seed: 42
+  temperature: 0.9
+
+reference:
+  wav: references/reference.wav
+  ref_text_file: references/reference.txt
+
+# Book text for dataset sentences — select BOOK_PRESET in the Colab notebook (see config.yaml).
+book_source: https://www.gutenberg.org/cache/epub/19163/pg19163.txt

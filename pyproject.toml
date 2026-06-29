@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "piper-voice-clone"
+version = "1.0.0"
+description = "Voice cloning with Qwen3-TTS and Piper fine-tuning"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "huggingface_hub>=0.23.0",
+  "soundfile>=0.12.1",
+  "librosa>=0.10.0,<1",
+  "numpy>=1.24.0",
+  "scipy>=1.10.0",
+  "tqdm>=4.66.0",
+  "PyYAML>=6.0",
+  "requests>=2.31.0",
+  "resampy>=0.4.0",
+]
+
+[project.optional-dependencies]
+faster = [
+  "faster-qwen3-tts>=0.2.6",
+  "torch>=2.5.1",
+]
+
+[project.scripts]
+generate-voice-dataset = "voice_cloning.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

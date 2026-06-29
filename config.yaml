@@ -1,0 +1,40 @@
+# Piper voice cloning + fine-tuning using Qwen3-TTS.
+
+voice_name: myvoice
+output_root: datasets
+
+# Dataset directory: datasets/{voice_name}-{language_code}_{dataset_version}/
+language_code: de
+dataset_version: v01
+espeak_voice: de
+
+total_entries: 2500
+val_ratio: 0.12
+seed: 42
+resume: true
+max_sentence_words: 50  # skip (do not chunk) book sentences longer than this
+
+tts:
+  backend: qwentts          # qwentts (local GGUF) | faster (Colab / PyTorch)
+  model_repo: Serveurperso/Qwen3-TTS-GGUF
+  model_size: 0.6b
+  mode: base
+  quant: Q8_0
+  language: German
+  device: CUDA0              # qwentts: CUDA0 | faster: cuda
+  bin: qwentts.cpp/build/qwen-tts
+  model_dir: models/Qwen3-TTS-GGUF
+  dtype: bfloat16
+  seed: 42
+  temperature: 0.9
+
+reference:
+  wav: references/my-voice.wav
+  ref_text_file: references/my-voice.txt
+
+# Fairy-tale / children's book — pick a preset in the Colab notebook (BOOK_PRESET) or paste a
+# Project Gutenberg plain-text URL (https://www.gutenberg.org/cache/epub/.../pg....txt).
+#   de-andersen-maerchen   — Andersen, Märchen (German)
+#   en-grimm-fairy-tales   — Grimm, Household Tales (English)
+#   fr-perrault-contes     — Perrault, Contes (French)
+book_source: https://www.gutenberg.org/cache/epub/19163/pg19163.txt

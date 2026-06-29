@@ -1,0 +1,29 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Generated / runtime data
+datasets/
+data/books/
+checkpoints/
+lightning_logs/
+models/
+logs/
+qwentts.cpp/
+piper1-gpl/
+
+# Generation state
+**/.generation_progress.json
+**/.generation_manifest.json
+
+# Local test outputs
+test_output.wav
+test_piper_output.wav
+
+# User reference audio (upload via Colab notebook or add locally)
+references/*.wav
+references/*.txt
+
+# Colab work dir (if synced)
+/content/
